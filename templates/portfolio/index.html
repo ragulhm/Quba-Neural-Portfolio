@@ -1,0 +1,1252 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main class="relative z-10">
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+
+        <!-- Background CSS Beams (Replica of background-beams.tsx) -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full bg-purple-500/5 blur-[120px]">
+            </div>
+            <svg class="absolute inset-0 w-full h-full opacity-20" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="beam1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="transparent" />
+                        <stop offset="50%" stop-color="hsl(271, 76%, 63%)" stop-opacity="0.4" />
+                        <stop offset="100%" stop-color="transparent" />
+                    </linearGradient>
+                </defs>
+                <line x1="0" y1="0" x2="100%" y2="100%" stroke="url(#beam1)" stroke-width="1"
+                    class="animate-glow-pulse" />
+                <line x1="50%" y1="0" x2="100%" y2="100%" stroke="url(#beam1)" stroke-width="0.5"
+                    class="animate-glow-pulse" style="animation-delay: 0.75s;" />
+            </svg>
+        </div>
+
+        <div class="container mx-auto px-6 z-10 relative">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Text content -->
+                <div class="text-left gs-reveal">
+                    <!-- Status badge -->
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-white/80 mb-6 gs-fade-up">
+                        <i data-lucide="sparkles" class="w-4 h-4 text-purple-400"></i>
+                        <span></span>
+                        <span class="relative flex h-2 w-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                        </span>
+                    </div>
+
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-4 tracking-tight gs-fade-up"
+                        style="animation-delay: 0.2s;">
+                        <span class="gradient-text">RAGUL M</span>
+                    </h1>
+
+                    <h2 class="text-2xl md:text-4xl text-white/70 mb-6 font-heading gs-fade-up"
+                        style="animation-delay: 0.4s;">
+                        Backend Developer
+                    </h2>
+
+                    <p class="text-lg text-white/50 mb-10 max-w-xl leading-relaxed gs-fade-up"
+                        style="animation-delay: 0.6s;">
+                        Multifaceted IT student passionate about AI and Web Development. Building intuitive solutions
+                        and continuously learning to solve problems in dynamic environments.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 gs-fade-up" style="animation-delay: 0.8s;">
+                        <a href="#projects"
+                            class="group flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-violet-500 text-white font-semibold hover:shadow-[0_0_40px_hsl(271_91%_72%/0.4)] transition-all duration-300 hover:scale-105 active:scale-95">
+                            View My Work
+                            <i data-lucide="arrow-down"
+                                class="w-4 h-4 group-hover:translate-y-1 transition-transform"></i>
+                        </a>
+                        <a href="#contact"
+                            class="flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-purple-500/40 text-white/80 font-medium hover:bg-purple-500/10 hover:border-purple-500/60 transition-all duration-300">
+                            <i data-lucide="mail" class="w-4 h-4"></i> Contact Me
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right: 3D Globe WebGL Container -->
+                <div class="h-[500px] w-full relative" id="canvas-container">
+                    <!-- Three.js will mount here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="relative py-24 md:py-32">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 gs-fade-up">
+                <span class="inline-block px-4 py-1.5 rounded-full glass text-sm text-purple-300 mb-4">Featured
+                    Work</span>
+                <h2 class="text-4xl md:text-6xl font-bold mb-4 gradient-text">Projects</h2>
+                <p class="text-lg text-white/40 max-w-2xl mx-auto">Building the future with AI and Web Technologies</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 auto-rows-[minmax(280px,auto)]">
+                {% for project in projects %}
+                <div
+                    class="group relative rounded-2xl glass-card p-6 overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 gs-scroll {% if project.grid_span == 2 %}md:col-span-2{% elif project.grid_span == 3 %}md:col-span-2 lg:col-span-3{% endif %}">
+                    <div
+                        class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-purple-500/10 via-transparent to-transparent pointer-events-none">
+                    </div>
+                    <div
+                        class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+
+                    <div class="relative z-10 h-full flex flex-col">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex-1">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <h3 class="text-xl font-bold text-white">{{ project.title }}</h3>
+                                    {% if project.status == 'live' %}
+                                    <span
+                                        class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-xs font-medium">
+                                        <i data-lucide="radio" class="w-3 h-3"></i> LIVE
+                                    </span>
+                                    {% endif %}
+                                </div>
+                                <p class="text-sm text-white/50 leading-relaxed">{{ project.description }}</p>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            {% for tech in project.technologies %}
+                            <span
+                                class="px-2.5 py-1 text-xs rounded-lg bg-purple-500/10 text-purple-300 border border-purple-500/15 font-medium">{{ tech }}</span>
+                            {% endfor %}
+                        </div>
+
+                        <ul class="space-y-1.5 mb-6 flex-1">
+                            {% for feature in project.features %}
+                            <li class="text-sm text-white/40 flex items-start gap-2">
+                                <span class="text-purple-400 mt-0.5 text-xs">▸</span> {{ feature }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+
+                        <div class="flex gap-3 pt-4 border-t border-white/5">
+                            {% if project.demo_link %}
+                            <a href="{{ project.demo_link }}" target="_blank"
+                                class="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-violet-500 text-white text-sm font-medium hover:shadow-[0_0_20px_hsl(271_91%_72%/0.3)] transition-all hover:scale-105 active:scale-95">
+                                <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Live Demo
+                            </a>
+                            {% endif %}
+                            <a href="{{ project.code_link }}" target="_blank"
+                                class="flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 text-white/60 text-sm font-medium hover:border-white/25 hover:text-white/80 transition-all">
+                                <i data-lucide="github" class="w-3.5 h-3.5"></i> Source Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 section-divider"></div>
+    </section>
+
+    <!-- Medium Articles Section -->
+    {% if medium_articles %}
+    <section id="medium-articles" class="relative py-24 md:py-32 bg-white/[0.02]">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gs-fade-up">
+                <div>
+                    <span class="inline-block px-4 py-1.5 rounded-full glass text-sm text-purple-300 mb-4">Latest Writing</span>
+                    <h2 class="text-4xl md:text-6xl font-bold mb-4 gradient-text">Medium Articles</h2>
+                    <p class="text-lg text-white/40 max-w-2xl">Thoughts, tutorials, and insights on software development.</p>
+                </div>
+                <a href="https://medium.com/@ragul.mr3391" target="_blank" class="mt-6 md:mt-0 flex flex-shrink-0 items-center gap-2 px-6 py-3 rounded-xl border border-white/10 text-white/60 text-sm font-medium hover:border-purple-500/50 hover:bg-purple-500/10 hover:text-white transition-all">
+                    View Medium Profile <i data-lucide="external-link" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% for article in medium_articles %}
+                <a href="{{ article.link }}" target="_blank" class="group relative rounded-2xl glass-card overflow-hidden transition-all duration-500 hover:scale-[1.02] gs-scroll flex flex-col h-full hover:shadow-[0_0_30px_hsl(271_91%_72%/0.15)] hover:border-purple-500/30">
+                    {% if article.thumbnail %}
+                    <div class="aspect-video w-full overflow-hidden border-b border-white/5">
+                        <img src="{{ article.thumbnail }}" alt="{{ article.title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                    {% else %}
+                    <!-- Fallback Gradient if no thumbnail -->
+                    <div class="aspect-video w-full bg-gradient-to-br from-purple-900/40 to-violet-900/40 border-b border-white/5 flex items-center justify-center">
+                        <i data-lucide="file-text" class="w-12 h-12 text-white/20"></i>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            {% for tag in article.categories|slice:":2" %}
+                                <span class="text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded bg-purple-500/10 text-purple-300 border border-purple-500/20">{{ tag.term }}</span>
+                            {% endfor %}
+                        </div>
+                        
+                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors leading-tight line-clamp-2">
+                            {{ article.title }}
+                        </h3>
+                        
+                        <div class="mt-auto pt-4 border-t border-white/5 flex items-center justify-between">
+                            <span class="text-xs text-white/40 flex items-center gap-1">
+                                <i data-lucide="calendar" class="w-3 h-3"></i> 
+                                {% if article.published_date %}
+                                    {{ article.published_date|date:"M d, Y" }}
+                                {% else %}
+                                    Recent
+                                {% endif %}
+                            </span>
+                            <span class="text-xs font-semibold text-purple-400 group-hover:text-purple-300 transition-colors flex items-center gap-1">
+                                Read on Medium <i data-lucide="arrow-up-right" class="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></i>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 section-divider"></div>
+    </section>
+    {% endif %}
+
+    <!-- Skills Section -->
+    <section id="skills" class="relative py-24 md:py-32">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 gs-fade-up">
+                <span class="inline-block px-4 py-1.5 rounded-full glass text-sm text-purple-300 mb-4">Technical
+                    Expertise</span>
+                <h2 class="text-4xl md:text-6xl font-bold mb-4 gradient-text">Skills & Tools</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for category in skills %}
+                <div
+                    class="vanilla-spotlight relative rounded-2xl glass-card overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 p-6 gs-scroll {% if forloop.counter > 3 %}lg:col-span-1 md:col-span-1{% endif %}">
+                    <!-- Javascript overrides these variables on hover -->
+                    <div class="pointer-events-none absolute inset-0 transition-opacity duration-500 opacity-0 hover:opacity-100"
+                        style="background: radial-gradient(300px circle at var(--mouse-x, 0) var(--mouse-y, 0), hsl(271 76% 63% / 0.12), transparent 60%);">
+                    </div>
+                    <div class="pointer-events-none absolute top-0 left-0 right-0 h-px transition-opacity duration-500 opacity-0 hover:opacity-100"
+                        style="background: radial-gradient(200px at var(--mouse-x, 0) 0px, hsl(271 91% 72% / 0.5), transparent);">
+                    </div>
+                    <style>
+                        .vanilla-spotlight:hover>div {
+                            opacity: 1 !important;
+                        }
+                    </style>
+
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-3 mb-5">
+                            <div class="p-2.5 rounded-xl bg-gradient-to-br {{ category.gradient }} shadow-lg">
+                                <i data-lucide="{{ category.icon }}" class="w-5 h-5 text-white"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">{{ category.title }}</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            {% for item in category.items %}
+                            <span
+                                class="px-3 py-1.5 text-sm rounded-lg bg-white/5 text-white/70 border border-white/8 hover:border-purple-500/30 hover:text-white hover:bg-purple-500/10 transition-colors duration-200 cursor-default">{{ item }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 section-divider"></div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="relative py-24 md:py-32">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 gs-fade-up">
+                <span class="inline-block px-4 py-1.5 rounded-full glass text-sm text-purple-300 mb-4">Get In
+                    Touch</span>
+                <h2 class="text-4xl md:text-6xl font-bold mb-4 gradient-text">Let's Connect</h2>
+                <p class="text-lg text-white/40 max-w-2xl mx-auto">Let's build something amazing together</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <!-- Left: Form -->
+                <div class="glass-card rounded-2xl p-8 gs-scroll" x-data="contactForm()">
+                    <h3 class="text-xl font-bold text-white mb-6">Send me a message</h3>
+                    
+                    <!-- Success/Error Feedback Toast -->
+                    <div x-show="toast.show" 
+                         x-transition:enter="transition ease-out duration-300"
+                         x-transition:enter-start="opacity-0 transform translate-y-2"
+                         x-transition:enter-end="opacity-100 transform translate-y-0"
+                         x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="opacity-100 transform translate-y-0"
+                         x-transition:leave-end="opacity-0 transform translate-y-2"
+                         class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-xl shadow-2xl flex items-center gap-3 glass border border-white/10"
+                         :class="toast.type === 'success' ? 'text-green-400 bg-green-500/10' : 'text-red-400 bg-red-500/10'">
+                        <i :data-lucide="toast.type === 'success' ? 'check-circle' : 'alert-circle'" class="w-5 h-5"></i>
+                        <span x-text="toast.message" class="text-sm font-medium"></span>
+                    </div>
+
+                    <form @submit.prevent="submitForm" class="space-y-5">
+                        {% csrf_token %}
+                        <div>
+                            <input name="name" x-model="formData.name" type="text" placeholder="Your Name" required
+                                class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/30 transition-all focus:bg-white/10">
+                        </div>
+                        <div>
+                            <input name="email" x-model="formData.email" type="email" placeholder="Your Email" required
+                                class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/30 transition-all focus:bg-white/10">
+                        </div>
+                        <div>
+                            <textarea name="message" x-model="formData.message" placeholder="Your Message" required rows="5"
+                                class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/30 transition-all resize-none focus:bg-white/10"></textarea>
+                        </div>
+                        <button type="submit" :disabled="loading"
+                            class="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-violet-500 text-white font-semibold hover:shadow-[0_0_30px_hsl(271_91%_72%/0.4)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed">
+                            <template x-if="!loading">
+                                <span class="flex items-center gap-2">
+                                    <i data-lucide="send" class="w-4 h-4"></i> Send Message
+                                </span>
+                            </template>
+                            <template x-if="loading">
+                                <span class="flex items-center gap-2">
+                                    <svg class="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    Sending...
+                                </span>
+                            </template>
+                        </button>
+                    </form>
+                </div>
+
+                <script>
+                    function contactForm() {
+                        return {
+                            formData: {
+                                name: '',
+                                email: '',
+                                message: ''
+                            },
+                            loading: false,
+                            toast: {
+                                show: false,
+                                message: '',
+                                type: 'success'
+                            },
+                            async submitForm() {
+                                this.loading = true;
+                                const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                                
+                                try {
+                                    const response = await fetch('/contact/submit/', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/x-www-form-urlencoded',
+                                            'X-CSRFToken': csrftoken
+                                        },
+                                        body: new URLSearchParams(this.formData)
+                                    });
+                                    
+                                    const data = await response.json();
+                                    
+                                    if (response.ok) {
+                                        this.showToast(data.message, 'success');
+                                        this.formData = { name: '', email: '', message: '' };
+                                    } else {
+                                        this.showToast(data.message || 'Something went wrong', 'error');
+                                    }
+                                } catch (error) {
+                                    this.showToast('Network error, please try again later', 'error');
+                                } finally {
+                                    this.loading = false;
+                                    // Re-initialize lucide icons for the toast
+                                    if (typeof lucide !== 'undefined') lucide.createIcons();
+                                }
+                            },
+                            showToast(msg, type) {
+                                this.toast.message = msg;
+                                this.toast.type = type;
+                                this.toast.show = true;
+                                setTimeout(() => { this.toast.show = false; }, 5000);
+                            }
+                        }
+                    }
+                </script>
+
+                <!-- Right: Links -->
+                <div class="space-y-4 gs-scroll" style="animation-delay: 0.2s;">
+                    <div class="glass-card rounded-2xl p-6 mb-4">
+                        <h3 class="text-lg font-bold text-white mb-1">⚡ Recruiter Fast-Track</h3>
+                        <p class="text-sm text-white/40 mb-4">Quick access to everything you need</p>
+                    </div>
+
+                    <a href="{% static 'Ragul_M_Resume.pdf' %}" download
+                        class="group flex items-center gap-4 p-4 rounded-xl transition-all duration-300 bg-gradient-to-r from-purple-600/20 to-violet-500/20 border border-purple-500/30 hover:border-purple-500/60 hover:shadow-[0_0_30px_hsl(271_91%_72%/0.15)]">
+                        <div class="p-2.5 rounded-xl bg-gradient-to-br from-purple-600 to-violet-500 transition-colors">
+                            <i data-lucide="download" class="w-5 h-5 text-white transition-colors"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="text-sm font-semibold text-white">Download Resume</div>
+                            <div class="text-xs text-white/40">Get my latest CV</div>
+                        </div>
+                        <i data-lucide="external-link"
+                            class="w-4 h-4 text-white/20 group-hover:text-white/50 transition-colors"></i>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/ragul-m-965251252/" target="_blank"
+                        class="group flex items-center gap-4 p-4 rounded-xl transition-all duration-300 glass-card hover:scale-[1.02]">
+                        <div class="p-2.5 rounded-xl bg-white/5 group-hover:bg-purple-500/10 transition-colors">
+                            <i data-lucide="linkedin"
+                                class="w-5 h-5 text-white/50 group-hover:text-purple-400 transition-colors"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="text-sm font-semibold text-white">LinkedIn Profile</div>
+                            <div class="text-xs text-white/40">Let's connect</div>
+                        </div>
+                        <i data-lucide="external-link"
+                            class="w-4 h-4 text-white/20 group-hover:text-white/50 transition-colors"></i>
+                    </a>
+
+                    <a href="https://github.com/ragulhm" target="_blank"
+                        class="group flex items-center gap-4 p-4 rounded-xl transition-all duration-300 glass-card hover:scale-[1.02]">
+                        <div class="p-2.5 rounded-xl bg-white/5 group-hover:bg-purple-500/10 transition-colors">
+                            <i data-lucide="github"
+                                class="w-5 h-5 text-white/50 group-hover:text-purple-400 transition-colors"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="text-sm font-semibold text-white">GitHub Profile</div>
+                            <div class="text-xs text-white/40">View my code</div>
+                        </div>
+                        <i data-lucide="external-link"
+                            class="w-4 h-4 text-white/20 group-hover:text-white/50 transition-colors"></i>
+                    </a>
+
+                    <!-- GitHub Live Pulse -->
+                    {% if github_activities %}
+                    <div class="glass-card rounded-2xl p-6 mt-6">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="relative flex h-2 w-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                            </span>
+                            <h3 class="text-sm font-bold text-white uppercase tracking-wider">GitHub Pulse</h3>
+                        </div>
+                        <ul class="space-y-4">
+                            {% for activity in github_activities %}
+                            <li class="relative pl-4 border-l border-white/10">
+                                <span class="absolute -left-[5px] top-2 h-2 w-2 rounded-full bg-purple-500 shadow-[0_0_10px_#a855f7]"></span>
+                                <div class="text-white/80 text-sm font-medium mb-1"><a href="{{ activity.url }}" target="_blank" class="hover:text-purple-400 transition-colors">{{ activity.message|truncatechars:40 }}</a></div>
+                                <div class="flex items-center justify-between text-xs text-white/40">
+                                    <span>{{ activity.repo }}</span>
+                                    <span>{{ activity.date|timesince }} ago</span>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     QUBA AI — NEURAL TERMINAL INTERFACE
+     A sci-fi HUD-inspired AI terminal. Not a chat app clone.
+     ═══════════════════════════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<div id="quba-assistant" x-data="neuralTerminal()" class="qn-fixed">
+
+    <!-- ╔═══ NEURAL ORB TRIGGER ═══╗ -->
+    <div @click="toggle()"
+         class="qn-orb-wrap"
+         x-show="!isOpen"
+         x-transition:enter="transition ease-out duration-500"
+         x-transition:enter-start="scale-0 opacity-0"
+         x-transition:enter-end="scale-100 opacity-100">
+        <div class="qn-orb">
+            <div class="qn-orb-ring"></div>
+            <div class="qn-orb-ring qn-orb-ring-2"></div>
+            <div class="qn-orb-core">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2a4 4 0 0 0-4 4v4a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4z"/>
+                    <path d="M18 10a6 6 0 0 1-12 0"/>
+                    <line x1="12" y1="18" x2="12" y2="22"/>
+                    <line x1="8" y1="22" x2="16" y2="22"/>
+                </svg>
+            </div>
+            <span class="qn-orb-badge">AI</span>
+        </div>
+    </div>
+
+    <!-- ╔═══ NEURAL TERMINAL PANEL ═══╗ -->
+    <div x-show="isOpen"
+         x-transition:enter="transition ease-out duration-500"
+         x-transition:enter-start="opacity-0 translate-y-6 scale-95"
+         x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+         x-transition:leave="transition ease-in duration-300"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 translate-y-6 scale-95"
+         class="qn-panel">
+
+        <!-- Animated BG Glow -->
+        <div class="qn-bg-glow"></div>
+        <!-- Scan Lines -->
+        <div class="qn-scanlines"></div>
+
+        <!-- ── HUD Header ── -->
+        <div class="qn-header">
+            <div class="qn-header-left">
+                <div class="qn-hex-avatar">
+                    <span>Q</span>
+                </div>
+                <div>
+                    <div class="qn-title">QUBA<span class="qn-title-dim">.neural</span></div>
+                    <div class="qn-status">
+                        <span class="qn-status-dot" :class="isLoading ? 'qn-status-processing' : 'qn-status-active'"></span>
+                        <span x-text="isLoading ? 'PROCESSING...' : 'NEURAL LINK ACTIVE'" class="qn-status-text"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="qn-header-actions">
+                <button @click="clearChat()" class="qn-hdr-btn" title="Clear">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6h14z"/></svg>
+                </button>
+                <button @click="toggle()" class="qn-hdr-btn" title="Minimize">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- ── Messages Container ── -->
+        <div class="qn-messages" id="qn-messages">
+
+            <template x-for="msg in messages" :key="msg.id">
+                <div :class="msg.role === 'user' ? 'qn-msg-user-wrap' : 'qn-msg-ai-wrap'">
+
+                    <!-- AI Terminal Block -->
+                    <template x-if="msg.role === 'assistant'">
+                        <div class="qn-msg-ai">
+                            <div class="qn-msg-ai-label">
+                                <span class="qn-ai-indicator"></span>
+                                QUBA
+                                <span class="qn-msg-time" x-text="msg.time"></span>
+                            </div>
+                            <div class="qn-msg-ai-body" x-html="marked.parse(msg.content)"></div>
+                        </div>
+                    </template>
+
+                    <!-- User Command Chip -->
+                    <template x-if="msg.role === 'user'">
+                        <div class="qn-msg-user">
+                            <div class="qn-msg-user-content">
+                                <span class="qn-cmd-prefix">&gt;_</span>
+                                <span x-text="msg.content"></span>
+                            </div>
+                            <span class="qn-msg-time qn-msg-time-user" x-text="msg.time"></span>
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+            <!-- Waveform Typing Indicator -->
+            <div x-show="isLoading" class="qn-msg-ai-wrap">
+                <div class="qn-msg-ai qn-typing-block">
+                    <div class="qn-msg-ai-label">
+                        <span class="qn-ai-indicator qn-status-processing"></span>
+                        QUBA
+                    </div>
+                    <div class="qn-waveform">
+                        <span class="qn-wave-bar" style="--i:1"></span>
+                        <span class="qn-wave-bar" style="--i:2"></span>
+                        <span class="qn-wave-bar" style="--i:3"></span>
+                        <span class="qn-wave-bar" style="--i:4"></span>
+                        <span class="qn-wave-bar" style="--i:5"></span>
+                        <span class="qn-wave-label">Synthesizing response...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Quick Actions ── -->
+        <div class="qn-quick-actions" x-show="messages.length <= 1">
+            <button @click="quickQuery('Tell me about his projects')" class="qn-chip">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z"/></svg>
+                Projects
+            </button>
+            <button @click="quickQuery('What are his skills?')" class="qn-chip">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                Skills
+            </button>
+            <button @click="quickQuery('Tell me about his experience')" class="qn-chip">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>
+                Experience
+            </button>
+            <button @click="quickQuery('How can I contact Ragul?')" class="qn-chip">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Contact
+            </button>
+        </div>
+
+        <!-- ── Command Input Bar ── -->
+        <form @submit.prevent="sendMessage()" class="qn-input-bar">
+            <span class="qn-prompt">&gt;_</span>
+            <input type="text"
+                   x-model="userInput"
+                   placeholder="Enter query..."
+                   :disabled="isLoading"
+                   class="qn-input"
+                   @keydown.enter.prevent="sendMessage()" />
+            <button type="submit"
+                    class="qn-send-btn"
+                    :class="userInput.trim() ? 'qn-send-active' : ''"
+                    :disabled="!userInput.trim() || isLoading">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </button>
+        </form>
+    </div><!-- /qn-panel -->
+</div><!-- /quba-assistant -->
+
+
+<!-- ═══════════════════════════════════════
+     NEURAL TERMINAL — STYLES
+     ═══════════════════════════════════════ -->
+<style>
+/* ── Fixed Container ── */
+.qn-fixed {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 9999;
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* ══════════════════════════════
+   NEURAL ORB (Trigger)
+   ══════════════════════════════ */
+.qn-orb-wrap { cursor: pointer; position: relative; }
+.qn-orb {
+    width: 60px;
+    height: 60px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.qn-orb-core {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #1e1b4b, #0c0a1e);
+    border: 1.5px solid rgba(139, 92, 246, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #a78bfa;
+    z-index: 2;
+    position: relative;
+    box-shadow:
+        0 0 20px rgba(139, 92, 246, 0.3),
+        0 0 60px rgba(139, 92, 246, 0.1),
+        inset 0 0 20px rgba(139, 92, 246, 0.1);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.qn-orb-wrap:hover .qn-orb-core {
+    box-shadow:
+        0 0 30px rgba(139, 92, 246, 0.5),
+        0 0 80px rgba(139, 92, 246, 0.2),
+        inset 0 0 30px rgba(139, 92, 246, 0.15);
+    transform: scale(1.08);
+    border-color: rgba(167, 139, 250, 0.8);
+}
+.qn-orb-ring {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    border-top-color: rgba(139, 92, 246, 0.6);
+    border-right-color: rgba(6, 182, 212, 0.3);
+    animation: qnOrbitSpin 3s linear infinite;
+}
+.qn-orb-ring-2 {
+    inset: -10px;
+    border-top-color: rgba(6, 182, 212, 0.4);
+    border-right-color: rgba(139, 92, 246, 0.2);
+    animation-duration: 5s;
+    animation-direction: reverse;
+}
+.qn-orb-badge {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    background: linear-gradient(135deg, #7c3aed, #06b6d4);
+    color: white;
+    font-size: 8px;
+    font-weight: 800;
+    padding: 2px 5px;
+    border-radius: 4px;
+    letter-spacing: 0.08em;
+    z-index: 3;
+    box-shadow: 0 2px 8px rgba(124, 58, 237, 0.5);
+}
+
+/* ══════════════════════════════
+   PANEL
+   ══════════════════════════════ */
+.qn-panel {
+    position: absolute;
+    bottom: 72px;
+    right: 0;
+    width: 400px;
+    height: 600px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform-origin: bottom right;
+    background: #06080a;
+    border: 1px solid rgba(139, 92, 246, 0.15);
+    box-shadow:
+        0 32px 64px -16px rgba(0, 0, 0, 0.8),
+        0 0 80px rgba(139, 92, 246, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+.qn-bg-glow {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 300px 200px at 20% 80%, rgba(139, 92, 246, 0.06), transparent),
+        radial-gradient(ellipse 200px 300px at 80% 20%, rgba(6, 182, 212, 0.04), transparent);
+    animation: qnGlowDrift 12s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+}
+.qn-scanlines {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 255, 255, 0.008) 2px,
+        rgba(255, 255, 255, 0.008) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ══════════════════════════════
+   HUD HEADER
+   ══════════════════════════════ */
+.qn-header {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: rgba(6, 8, 10, 0.8);
+    border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+    backdrop-filter: blur(10px);
+    flex-shrink: 0;
+}
+.qn-header-left { display: flex; align-items: center; gap: 10px; }
+.qn-hex-avatar {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(6, 182, 212, 0.15));
+    border: 1px solid rgba(139, 92, 246, 0.35);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+.qn-hex-avatar span {
+    color: #a78bfa;
+    font-weight: 900;
+    font-size: 14px;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+.qn-title {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: #e2e8f0;
+    letter-spacing: 0.12em;
+}
+.qn-title-dim { color: rgba(139, 92, 246, 0.5); font-weight: 400; }
+.qn-status { display: flex; align-items: center; gap: 5px; margin-top: 1px; }
+.qn-status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.qn-status-active {
+    background: #22c55e;
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+    animation: qnPulse 2s ease-in-out infinite;
+}
+.qn-status-processing {
+    background: #f59e0b;
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
+    animation: qnPulse 0.8s ease-in-out infinite;
+}
+.qn-status-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: rgba(148, 163, 184, 0.7);
+    letter-spacing: 0.1em;
+    font-weight: 500;
+}
+.qn-header-actions { display: flex; gap: 4px; }
+.qn-hdr-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: rgba(148, 163, 184, 0.5);
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s;
+}
+.qn-hdr-btn:hover {
+    background: rgba(139, 92, 246, 0.1);
+    border-color: rgba(139, 92, 246, 0.25);
+    color: #a78bfa;
+}
+
+/* ══════════════════════════════
+   MESSAGES
+   ══════════════════════════════ */
+.qn-messages {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    scroll-behavior: smooth;
+    /* Top fade mask for holographic depth */
+    mask-image: linear-gradient(to bottom, transparent 0%, black 5%, black 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 5%, black 100%);
+}
+.qn-messages::-webkit-scrollbar { width: 3px; }
+.qn-messages::-webkit-scrollbar-track { background: transparent; }
+.qn-messages::-webkit-scrollbar-thumb { background: rgba(139, 92, 246, 0.2); border-radius: 3px; }
+
+/* ── AI Terminal Block ── */
+.qn-msg-ai-wrap { display: flex; justify-content: flex-start; }
+.qn-msg-ai {
+    max-width: 90%;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(139, 92, 246, 0.08);
+    border-left: 2px solid rgba(139, 92, 246, 0.4);
+    border-radius: 2px 10px 10px 2px;
+    padding: 10px 14px;
+    animation: qnSlideIn 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.qn-msg-ai-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: rgba(139, 92, 246, 0.6);
+    letter-spacing: 0.12em;
+    font-weight: 600;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+.qn-ai-indicator {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #a78bfa;
+    box-shadow: 0 0 6px rgba(167, 139, 250, 0.5);
+}
+.qn-msg-ai-body {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 12.5px;
+    line-height: 1.65;
+    color: #c8d6e5;
+    word-break: break-word;
+}
+/* Markdown inside AI */
+.qn-msg-ai-body p { margin: 0 0 8px; }
+.qn-msg-ai-body p:last-child { margin-bottom: 0; }
+.qn-msg-ai-body strong { color: #a78bfa; font-weight: 700; }
+.qn-msg-ai-body em { color: #67e8f9; font-style: normal; }
+.qn-msg-ai-body code {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 11.5px;
+    color: #86efac;
+    border: 1px solid rgba(134, 239, 172, 0.1);
+}
+.qn-msg-ai-body pre {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 8px 0;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.qn-msg-ai-body ul, .qn-msg-ai-body ol { margin: 6px 0; padding-left: 16px; }
+.qn-msg-ai-body li { margin-bottom: 4px; }
+.qn-msg-ai-body a {
+    color: #67e8f9;
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(103, 232, 249, 0.3);
+    transition: all 0.2s;
+}
+.qn-msg-ai-body a:hover { color: #a5f3fc; border-bottom-style: solid; }
+.qn-msg-ai-body h1, .qn-msg-ai-body h2, .qn-msg-ai-body h3 {
+    color: #e2e8f0;
+    font-size: 13px;
+    font-weight: 700;
+    margin: 10px 0 4px;
+    letter-spacing: 0.03em;
+}
+
+/* ── User Command Chip ── */
+.qn-msg-user-wrap { display: flex; justify-content: flex-end; }
+.qn-msg-user {
+    max-width: 80%;
+    text-align: right;
+    animation: qnSlideInUser 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.qn-msg-user-content {
+    display: inline-block;
+    background: rgba(139, 92, 246, 0.08);
+    border: 1px solid rgba(139, 92, 246, 0.25);
+    border-radius: 10px 10px 2px 10px;
+    padding: 8px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: #e2e8f0;
+    text-align: left;
+}
+.qn-cmd-prefix {
+    color: #a78bfa;
+    font-weight: 700;
+    margin-right: 6px;
+    opacity: 0.7;
+}
+.qn-msg-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: rgba(148, 163, 184, 0.35);
+    margin-left: auto;
+}
+.qn-msg-time-user {
+    display: block;
+    text-align: right;
+    margin-top: 3px;
+    margin-right: 4px;
+}
+
+/* ── Waveform Typing ── */
+.qn-typing-block { border-left-color: rgba(245, 158, 11, 0.4); }
+.qn-waveform {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 24px;
+    padding: 4px 0;
+}
+.qn-wave-bar {
+    width: 3px;
+    border-radius: 2px;
+    background: linear-gradient(to top, #7c3aed, #06b6d4);
+    animation: qnWave 1.2s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.12s);
+}
+.qn-wave-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: rgba(148, 163, 184, 0.4);
+    margin-left: 8px;
+    align-self: center;
+    letter-spacing: 0.05em;
+}
+
+/* ── Quick Actions ── */
+.qn-quick-actions {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    gap: 6px;
+    padding: 0 16px 10px;
+    flex-wrap: wrap;
+}
+.qn-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    color: rgba(167, 139, 250, 0.8);
+    background: rgba(139, 92, 246, 0.06);
+    border: 1px solid rgba(139, 92, 246, 0.15);
+    cursor: pointer;
+    transition: all 0.25s;
+    letter-spacing: 0.04em;
+}
+.qn-chip:hover {
+    background: rgba(139, 92, 246, 0.15);
+    border-color: rgba(139, 92, 246, 0.35);
+    color: #c4b5fd;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
+}
+.qn-chip svg { opacity: 0.6; stroke: currentColor; }
+
+/* ══════════════════════════════
+   COMMAND INPUT BAR
+   ══════════════════════════════ */
+.qn-input-bar {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px 14px;
+    background: rgba(6, 8, 10, 0.7);
+    border-top: 1px solid rgba(139, 92, 246, 0.08);
+    backdrop-filter: blur(10px);
+    flex-shrink: 0;
+}
+.qn-prompt {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(139, 92, 246, 0.5);
+    flex-shrink: 0;
+    user-select: none;
+}
+.qn-input {
+    flex: 1;
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(139, 92, 246, 0.1);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: #e2e8f0;
+    outline: none;
+    transition: all 0.3s;
+}
+.qn-input::placeholder {
+    color: rgba(148, 163, 184, 0.3);
+    font-style: italic;
+}
+.qn-input:focus {
+    border-color: rgba(139, 92, 246, 0.35);
+    background: rgba(15, 23, 42, 0.8);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.06);
+}
+.qn-send-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background: rgba(139, 92, 246, 0.08);
+    border: 1px solid rgba(139, 92, 246, 0.15);
+    color: rgba(139, 92, 246, 0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    flex-shrink: 0;
+}
+.qn-send-active {
+    background: linear-gradient(135deg, #7c3aed, #6d28d9) !important;
+    border-color: rgba(124, 58, 237, 0.6) !important;
+    color: white !important;
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+}
+.qn-send-active:hover {
+    box-shadow: 0 0 30px rgba(124, 58, 237, 0.5);
+    transform: scale(1.05);
+}
+
+/* ══════════════════════════════
+   ANIMATIONS
+   ══════════════════════════════ */
+@keyframes qnOrbitSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+@keyframes qnPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+@keyframes qnGlowDrift {
+    0% { background-position: 20% 80%; }
+    50% { background-position: 60% 40%; }
+    100% { background-position: 30% 70%; }
+}
+@keyframes qnSlideIn {
+    from { opacity: 0; transform: translateX(-12px) translateY(4px); }
+    to { opacity: 1; transform: translateX(0) translateY(0); }
+}
+@keyframes qnSlideInUser {
+    from { opacity: 0; transform: translateX(12px) translateY(4px); }
+    to { opacity: 1; transform: translateX(0) translateY(0); }
+}
+@keyframes qnWave {
+    0%, 100% { height: 4px; opacity: 0.3; }
+    50% { height: 18px; opacity: 1; }
+}
+
+/* ══════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════ */
+@media (max-width: 480px) {
+    .qn-panel {
+        width: calc(100vw - 2rem);
+        height: calc(100vh - 8rem);
+        bottom: 68px;
+        right: -0.5rem;
+        border-radius: 14px;
+    }
+    .qn-fixed { right: 1rem; bottom: 1rem; }
+}
+</style>
+
+
+<!-- ═══════════════════════════════════════
+     NEURAL TERMINAL — LOGIC (Alpine.js)
+     ═══════════════════════════════════════ -->
+<script>
+function neuralTerminal() {
+    return {
+        isOpen: false,
+        userInput: '',
+        isLoading: false,
+        messageIdCounter: 0,
+        messages: [
+            {
+                id: 0,
+                role: 'assistant',
+                content: "**Neural link established.**\n\nI am **Quba**, Ragul's portfolio intelligence system. Query me about his **projects**, **tech stack**, **experience**, or anything else.\n\n`Ready for input...`",
+                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            }
+        ],
+        getTime() {
+            return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        },
+        scrollToBottom() {
+            this.$nextTick(() => {
+                const el = document.getElementById('qn-messages');
+                if (el) el.scrollTop = el.scrollHeight;
+            });
+        },
+        init() {
+            setTimeout(() => {
+                if (!this.isOpen) this.toggle();
+            }, 3500);
+        },
+        toggle() {
+            this.isOpen = !this.isOpen;
+            if (this.isOpen) this.scrollToBottom();
+        },
+        clearChat() {
+            this.messageIdCounter = 0;
+            this.messages = [{
+                id: 0,
+                role: 'assistant',
+                content: "**Memory cleared.** Neural link re-established.\n\n`Awaiting new query...`",
+                time: this.getTime()
+            }];
+        },
+        quickQuery(text) {
+            this.userInput = text;
+            this.sendMessage();
+        },
+        async sendMessage() {
+            if (!this.userInput.trim() || this.isLoading) return;
+
+            const question = this.userInput.trim();
+            this.messageIdCounter++;
+            this.messages.push({
+                id: this.messageIdCounter,
+                role: 'user',
+                content: question,
+                time: this.getTime()
+            });
+            this.userInput = '';
+            this.isLoading = true;
+            this.scrollToBottom();
+
+            try {
+                const formData = new FormData();
+                formData.append('question', question);
+                formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+                const response = await fetch('/ai/query/', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                this.messageIdCounter++;
+
+                if (data.status === 'success') {
+                    this.messages.push({
+                        id: this.messageIdCounter,
+                        role: 'assistant',
+                        content: data.answer,
+                        time: this.getTime()
+                    });
+                } else {
+                    this.messages.push({
+                        id: this.messageIdCounter,
+                        role: 'assistant',
+                        content: '`⚠ LINK SEVERED` — Neural connection interrupted. Retry query.',
+                        time: this.getTime()
+                    });
+                }
+            } catch (error) {
+                this.messageIdCounter++;
+                this.messages.push({
+                    id: this.messageIdCounter,
+                    role: 'assistant',
+                    content: '`⚠ NETWORK ANOMALY` — Signal lost. Verify connection and retry.',
+                    time: this.getTime()
+                });
+            } finally {
+                this.isLoading = false;
+                this.scrollToBottom();
+            }
+        }
+    }
+}
+</script>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="{% static 'js/three_scene.js' %}?v=2.0"></script>
+{% endblock %}

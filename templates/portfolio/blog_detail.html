@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load blog_extras %}
+
+{% block content %}
+<main class="relative z-10 pt-32 pb-24 min-h-screen">
+    <article class="container mx-auto px-6 max-w-4xl">
+        <!-- Header -->
+        <header class="mb-12 gs-fade-up">
+            <div class="flex items-center gap-3 mb-6">
+                <a href="{% url 'blog_list' %}" class="inline-flex items-center gap-2 text-sm font-semibold text-purple-400 hover:text-purple-300 transition-colors">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Blog
+                </a>
+                <span class="text-white/20">|</span>
+                <span class="text-sm font-semibold px-2 py-1 rounded bg-purple-500/20 text-purple-300 border border-purple-500/20">{{ post.category.name }}</span>
+                <span class="text-sm text-white/40">{{ post.published_at|date:"F d, Y" }}</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">{{ post.title }}</h1>
+            
+            {% if post.excerpt %}
+            <p class="text-xl text-white/60 leading-relaxed mb-8">
+                {{ post.excerpt }}
+            </p>
+            {% endif %}
+
+            {% if post.thumbnail_url %}
+            <div class="aspect-video w-full rounded-2xl overflow-hidden glass-card">
+                <img src="{{ post.thumbnail_url }}" alt="{{ post.title }}" class="w-full h-full object-cover">
+            </div>
+            {% endif %}
+        </header>
+
+        <!-- Content Structure for Markdown -->
+        <style>
+            .prose-astral h1, .prose-astral h2, .prose-astral h3, .prose-astral h4 {
+                color: #fff;
+                font-weight: 700;
+                margin-top: 2em;
+                margin-bottom: 1em;
+            }
+            .prose-astral h1 { font-size: 2.25rem; }
+            .prose-astral h2 { font-size: 1.875rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; }
+            .prose-astral h3 { font-size: 1.5rem; }
+            .prose-astral p {
+                color: rgba(255, 255, 255, 0.7);
+                line-height: 1.8;
+                margin-bottom: 1.5em;
+            }
+            .prose-astral a {
+                color: #a855f7;
+                text-decoration: underline;
+                text-decoration-color: rgba(168, 85, 247, 0.4);
+                text-underline-offset: 4px;
+            }
+            .prose-astral a:hover {
+                text-decoration-color: #a855f7;
+            }
+            .prose-astral ul, .prose-astral ol {
+                color: rgba(255, 255, 255, 0.7);
+                margin-bottom: 1.5em;
+                padding-left: 1.5em;
+            }
+            .prose-astral ul { list-style-type: disc; }
+            .prose-astral ol { list-style-type: decimal; }
+            .prose-astral li { margin-bottom: 0.5em; }
+            .prose-astral blockquote {
+                border-left: 4px solid #a855f7;
+                padding-left: 1em;
+                margin-left: 0;
+                margin-right: 0;
+                font-style: italic;
+                color: rgba(255, 255, 255, 0.5);
+                background: rgba(168, 85, 247, 0.05);
+                padding: 1rem 1rem 1rem 1.5rem;
+                border-radius: 0 0.5rem 0.5rem 0;
+            }
+            .prose-astral img {
+                border-radius: 0.75rem;
+                margin: 2em auto;
+                max-width: 100%;
+                border: 1px solid rgba(255,255,255,0.1);
+            }
+            .prose-astral hr {
+                border-color: rgba(255, 255, 255, 0.1);
+                margin: 3em 0;
+            }
+            /* Markdown Code Blocks */
+            .prose-astral pre {
+                background: rgba(0, 0, 0, 0.4);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 0.75rem;
+                padding: 1.5rem;
+                overflow-x: auto;
+                margin-bottom: 2em;
+            }
+            .prose-astral code {
+                font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+                font-size: 0.875rem;
+                color: #e2e8f0;
+                background: rgba(255, 255, 255, 0.05);
+                padding: 0.2em 0.4em;
+                border-radius: 0.25rem;
+            }
+            .prose-astral pre code {
+                background: transparent;
+                padding: 0;
+                color: inherit;
+            }
+        </style>
+
+        <div class="prose-astral gs-fade-up" style="animation-delay: 0.2s;">
+            {{ post.content|markdown }}
+        </div>
+    </article>
+</main>
+{% endblock %}

@@ -1,0 +1,145 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ragul M -</title>
+    <meta name="description"
+        content="Portfolio of Ragul M, an AI & MERN Stack Developer specializing in React, Express.js, MongoDB, and AI integration.">
+
+    <!-- Google Fonts Matching Next.js configuration -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@100..800&family=Space+Grotesk:wght@300..700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --font-inter: 'Inter', sans-serif;
+            --font-space-grotesk: 'Space Grotesk', sans-serif;
+            --font-jetbrains: 'JetBrains Mono', monospace;
+        }
+    </style>
+
+    <!-- Tailwind Generated CSS -->
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+
+    <!-- Dependencies -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Optional: Alpine.js for light JS reactivity (Mobile Nav etc.) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body class="bg-background text-foreground overflow-x-hidden font-sans antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-500" id="main-nav"
+        x-data="{ open: false, scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 50)">
+        <div :class="scrolled ? 'glass-strong shadow-lg shadow-purple-500/5' : 'bg-transparent'"
+            class="flex items-center gap-1 px-2 py-2 rounded-2xl transition-all duration-500">
+            <a href="#home" class="px-4 py-2 text-lg font-bold gradient-text hover:text-glow transition-all">RM</a>
+
+            <!-- Desktop Nav Items -->
+            <div class="hidden md:flex items-center gap-1">
+                <a href="#home"
+                    class="px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 text-white/60 hover:text-white hover:bg-white/5">Home</a>
+                <a href="#projects"
+                    class="px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 text-white/60 hover:text-white hover:bg-white/5">Projects</a>
+                <a href="#medium-articles"
+                    class="px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 text-white/60 hover:text-white hover:bg-white/5">Articles</a>
+                <a href="#skills"
+                    class="px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 text-white/60 hover:text-white hover:bg-white/5">Skills</a>
+                <a href="#contact"
+                    class="px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 text-white/60 hover:text-white hover:bg-white/5">Contact</a>
+
+                <a href="{% static 'Ragul_M_Resume.pdf' %}" download
+                    class="ml-2 flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold bg-gradient-to-r from-purple-600 to-violet-500 text-white hover:shadow-[0_0_30px_hsl(271_91%_72%/0.4)] transition-all duration-300 hover:scale-105 active:scale-95">
+                    <i data-lucide="download" class="w-4 h-4"></i> Resume
+                </a>
+            </div>
+
+            <!-- Mobile menu toggle -->
+            <button @click="open = !open" class="md:hidden p-2 text-white/70 hover:text-white ml-2">
+                <i data-lucide="menu" x-show="!open" class="w-5 h-5"></i>
+                <i data-lucide="x" x-show="open" style="display: none;" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <!-- Mobile menu -->
+        <div x-show="open" style="display: none;" x-transition
+            class="fixed inset-x-4 top-20 z-50 md:hidden glass-strong rounded-2xl p-4 space-y-2">
+            <a @click="open = false" href="#home"
+                class="block w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-all text-white/60 hover:text-white hover:bg-white/5">Home</a>
+            <a @click="open = false" href="#projects"
+                class="block w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-all text-white/60 hover:text-white hover:bg-white/5">Projects</a>
+            <a @click="open = false" href="#medium-articles"
+                class="block w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-all text-white/60 hover:text-white hover:bg-white/5">Articles</a>
+            <a @click="open = false" href="#skills"
+                class="block w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-all text-white/60 hover:text-white hover:bg-white/5">Skills</a>
+            <a @click="open = false" href="#contact"
+                class="block w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-all text-white/60 hover:text-white hover:bg-white/5">Contact</a>
+            <a @click="open = false" href="{% static 'Ragul_M_Resume.pdf' %}" download
+                class="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl text-sm font-semibold bg-gradient-to-r from-purple-600 to-violet-500 text-white mt-2">
+                <i data-lucide="download" class="w-4 h-4"></i> Download Resume
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content Block -->
+    {% block content %}
+    {% endblock %}
+
+    <!-- Footer -->
+    <footer class="relative py-12 border-t border-white/5">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-2 text-white/40 text-sm">
+                    <span>©
+                        <script>document.write(new Date().getFullYear())</script>
+                    </span>
+                    <span class="gradient-text font-semibold">Ragul M</span>
+                    <span class="hidden sm:inline">·</span>
+                    <span class="hidden sm:inline-flex items-center gap-1">
+                        Built with <i data-lucide="heart" class="w-3 h-3 text-red-400 fill-red-400"></i> and code
+                    </span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="https://github.com/ragulhm" target="_blank"
+                        class="p-2 rounded-lg text-white/30 hover:text-white/70 hover:bg-white/5 transition-all duration-200">
+                        <i data-lucide="github" class="w-4 h-4"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/ragul-m-965251252/" target="_blank"
+                        class="p-2 rounded-lg text-white/30 hover:text-white/70 hover:bg-white/5 transition-all duration-200">
+                        <i data-lucide="linkedin" class="w-4 h-4"></i>
+                    </a>
+                    <a href="mailto:Ragul.mr3391@gmail.com"
+                        class="p-2 rounded-lg text-white/30 hover:text-white/70 hover:bg-white/5 transition-all duration-200">
+                        <i data-lucide="mail" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Parse Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+
+    <!-- Initialize Animations / UI Logic -->
+    <script src="{% static 'js/animations.js' %}"></script>
+
+    <!-- Additional Scripts Block -->
+    {% block scripts %}
+    {% endblock %}
+</body>
+
+</html>

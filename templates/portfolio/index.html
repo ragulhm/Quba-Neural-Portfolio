@@ -136,13 +136,17 @@
                         <div class="flex gap-3 pt-4 border-t border-white/5">
                             {% if project.demo_link %}
                             <a href="{{ project.demo_link }}" target="_blank"
-                                class="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-violet-500 text-white text-sm font-medium hover:shadow-[0_0_20px_hsl(271_91%_72%/0.3)] transition-all hover:scale-105 active:scale-95">
-                                <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Live Demo
+                                class="group relative flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-sm font-medium backdrop-blur-md overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 hover:bg-purple-500/10 hover:border-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.3)] hover:text-white">
+                                <div class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent group-hover:animate-shimmer z-0"></div>
+                                <i data-lucide="external-link" class="w-3.5 h-3.5 relative z-10 group-hover:text-purple-300 transition-colors"></i> 
+                                <span class="relative z-10">Live Demo</span>
                             </a>
                             {% endif %}
                             <a href="{{ project.code_link }}" target="_blank"
-                                class="flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 text-white/60 text-sm font-medium hover:border-white/25 hover:text-white/80 transition-all">
-                                <i data-lucide="github" class="w-3.5 h-3.5"></i> Source Code
+                                class="group relative flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-sm font-medium backdrop-blur-md overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 hover:bg-purple-500/10 hover:border-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.3)] hover:text-white">
+                                <div class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent group-hover:animate-shimmer z-0"></div>
+                                <i data-lucide="github" class="w-3.5 h-3.5 relative z-10 group-hover:text-purple-300 transition-colors"></i> 
+                                <span class="relative z-10">Source Code</span>
                             </a>
                         </div>
                     </div>

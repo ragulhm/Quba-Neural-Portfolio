@@ -61,8 +61,10 @@
                     class="px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 text-white/60 hover:text-white hover:bg-white/5">Contact</a>
 
                 <a href="{% static 'Ragul_M_Resume.pdf' %}" download
-                    class="ml-2 flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold bg-gradient-to-r from-purple-600 to-violet-500 text-white hover:shadow-[0_0_30px_hsl(271_91%_72%/0.4)] transition-all duration-300 hover:scale-105 active:scale-95">
-                    <i data-lucide="download" class="w-4 h-4"></i> Resume
+                    class="group relative ml-2 flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold bg-white/5 border border-white/10 text-white backdrop-blur-md overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 hover:bg-purple-500/10 hover:border-purple-500/50 hover:shadow-[0_0_30px_rgba(168,85,247,0.3)] hover:text-white">
+                    <div class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent group-hover:animate-shimmer z-0"></div>
+                    <i data-lucide="download" class="w-4 h-4 relative z-10 group-hover:text-purple-300 transition-colors"></i>
+                    <span class="relative z-10">Resume</span>
                 </a>
             </div>
 
@@ -87,8 +89,10 @@
             <a @click="open = false" href="#contact"
                 class="block w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-all text-white/60 hover:text-white hover:bg-white/5">Contact</a>
             <a @click="open = false" href="{% static 'Ragul_M_Resume.pdf' %}" download
-                class="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl text-sm font-semibold bg-gradient-to-r from-purple-600 to-violet-500 text-white mt-2">
-                <i data-lucide="download" class="w-4 h-4"></i> Download Resume
+                class="group relative flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl text-sm font-semibold bg-white/5 border border-white/10 text-white backdrop-blur-md overflow-hidden transition-all duration-300 hover:bg-purple-500/10 hover:border-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.3)] mt-2">
+                <div class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent group-hover:animate-shimmer z-0"></div>
+                <i data-lucide="download" class="w-4 h-4 relative z-10 group-hover:text-purple-300 transition-colors"></i>
+                <span class="relative z-10">Download Resume</span>
             </a>
         </div>
     </nav>
